@@ -1,0 +1,62 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include<bits/stdc++.h>
+#include <iostream>
+using namespace std;
+void PrintSolution(int** solution , int n)
+{
+    
+    
+}
+void mazeHelp(int maze[][20] ,int** solution , int n, int x ,int y )
+{
+    if(x==n-1 && y == n-1)
+    {
+        solution[x][y] = 1;
+        PrintSolution(solution , n);
+    }
+    if(x == n || x < 0 || y ==n || y < 0 || maze[x][y] == 0 || solution[x][y] == 1)
+    {
+        return;
+    }
+    solution[x][y] = 1;
+    //up
+    mazeHelp(maze , solution, n ,x-1 ,y);
+    //down
+    mazeHelp(maze , solution , n,x+1 ,y);
+    //left
+    mazeHelp(maze , solution , n,x ,y-1);
+    //right
+    mazeHelp(maze , solution, n ,x ,y+1);
+    solution[x][y] = 0;
+}
+
+void ratInMaze(int maze[][20] , int n)
+{
+   int** solution = new int*[n];
+  for(int i=0;i<n;i++){
+  	solution[i] = new int[n];
+  }
+    mazeHelp(maze , solution , n , 0 , 0);
+}
+int main() {
+	// your code goes here
+	int n;
+	cin>>n;
+	int maze[20][20];
+	for(int i = 0; i < n ;i++){
+	for(int j = 0; j < n; j++){
+        	cin >> maze[i][j];
+        }		
+  }
+	ratInMaze(maze , n);
+	return 0;
+}
+
+    
